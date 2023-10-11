@@ -11,8 +11,8 @@ from .serializers import CustomUserSerializer,ProjectSerializer,TaskSerializer
 @permission_classes([CustomUserPermission])
 
 def custom_user(request):
+    user = CustomUser.objects.all()
     if request.method == 'GET':
-        user = CustomUser.objects.all()
         serializer = CustomUserSerializer(user,many = True,context = {'request':request})
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'POST':
@@ -27,8 +27,8 @@ def custom_user(request):
 @permission_classes([CustomUserDetailPermission])
 
 def custom_user_detail(request, pk):
+    user = CustomUser.objects.get(pk=pk)
     if request.method == 'GET':
-        user = CustomUser.objects.get(pk=pk)
         serializer = CustomUserSerializer(user,context = {'request':request})
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'PUT':
@@ -46,8 +46,8 @@ def custom_user_detail(request, pk):
 @permission_classes([ProjectPermission])
 
 def project(request):
+    project = Project.objects.all()
     if request.method == 'GET':
-        project = Project.objects.all()
         serializer = ProjectSerializer(project,many = True,)
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'POST':
@@ -62,8 +62,8 @@ def project(request):
 @permission_classes([ProjectDetailPermission])
 
 def project_detail(request, pk):
+    project = Project.objects.get(pk=pk)
     if request.method == 'GET':
-        project = Project.objects.get(pk=pk)
         serializer = ProjectSerializer(project)
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'PUT':
@@ -82,8 +82,8 @@ def project_detail(request, pk):
 @permission_classes([TaskPermission])
 
 def task(request):
+    task = Task.objects.all()
     if request.method == 'GET':
-        task = Task.objects.all()
         serializer = TaskSerializer(task,many = True,context = {'request':request})
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'POST':
@@ -98,8 +98,8 @@ def task(request):
 @permission_classes([TaskDetailPermission])
 
 def task_detail(request, pk):
+    task = Task.objects.get(pk=pk)
     if request.method == 'GET':
-        task = Task.objects.get(pk=pk)
         serializer = TaskSerializer(task)
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'PUT':
