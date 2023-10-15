@@ -41,9 +41,10 @@ class ProjectDetailPermission(BasePermission):
         if request.method == 'GET':
             return True
         
-        elif request.method in ['PUT','DELETE']:
+        elif request.method in ['POST','PUT','DELETE']:
             return request.user.is_authenticated
         
+
 
 
 class TaskPermission(BasePermission):
@@ -64,5 +65,6 @@ class TaskDetailPermission(BasePermission):
         if request.method == 'GET':
             return request.user.is_authenticated
         
-        elif request.method in ['PUT','DELETE']:
+        elif request.method in ['POST','PUT','DELETE']:
             return request.user.is_authenticated
+        

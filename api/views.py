@@ -32,7 +32,7 @@ def custom_user_detail(request, pk):
         serializer = CustomUserSerializer(user,context = {'request':request})
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'PUT':
-        serializer = CustomUserSerializer(data= request.data,context = {'request':request})
+        serializer = CustomUserSerializer(data= request.data,context = {'request':request},partial = True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=HTTP_201_CREATED)
@@ -51,7 +51,7 @@ def project(request):
         serializer = ProjectSerializer(project,many = True,)
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = ProjectSerializer(data= request.data,)
+        serializer = ProjectSerializer(data= request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=HTTP_201_CREATED)
@@ -67,7 +67,7 @@ def project_detail(request, pk):
         serializer = ProjectSerializer(project)
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'PUT':
-        serializer = ProjectSerializer(data= request.data,)
+        serializer = ProjectSerializer(data= request.data,partial = True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=HTTP_201_CREATED)
@@ -103,7 +103,7 @@ def task_detail(request, pk):
         serializer = TaskSerializer(task)
         return Response(serializer.data,status=HTTP_200_OK)
     elif request.method == 'PUT':
-        serializer = TaskSerializer(data= request.data,context = {'request':request})
+        serializer = TaskSerializer(data= request.data,context = {'request':request},partial = True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=HTTP_201_CREATED)
